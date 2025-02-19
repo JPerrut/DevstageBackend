@@ -2,10 +2,27 @@ POST http://localhost:3333/subscriptions
 Content-Type: application/json
 
 {
-    "name": "João Pedro",
-    "email": "joaoperrutc@gmail.com"
+    "name": "Usuário Indicado 3",
+    "email": "indicado3@gmail.com",
+    "referrer": "f6e75161-1e3c-4224-a035-a3b9b479d8e7"
 }
 
 ###
 
-GET http://localhost:3333/invites/joao123
+GET http://localhost:3333/invites/e889c703-9ec3-4df4-a845-812cc3ed55f0
+
+###
+
+GET http://localhost:3333/subscribers/e889c703-9ec3-4df4-a845-812cc3ed55f0/ranking/clicks
+
+###
+
+GET http://localhost:3333/subscribers/e889c703-9ec3-4df4-a845-812cc3ed55f0/ranking/count
+
+###
+
+GET http://localhost:3333/subscribers/e889c703-9ec3-4df4-a845-812cc3ed55f0/ranking/position
+
+###
+
+GET http://localhost:3333/ranking
