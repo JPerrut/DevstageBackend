@@ -1,5 +1,5 @@
 import type { FastifyPluginAsyncZod } from 'fastify-type-provider-zod'
-import z from 'zod'
+import { z } from 'zod'
 import { subscribeToEvent } from '../functions/subscribe-to-event'
 
 export const subscribeToEventRoute: FastifyPluginAsyncZod = async app => {
@@ -7,17 +7,16 @@ export const subscribeToEventRoute: FastifyPluginAsyncZod = async app => {
     '/subscriptions',
     {
       schema: {
-        summary: 'Subscribes someone to the event',
-        tags: ['subscription'],
+        summary: 'Subscribe to event',
+        tags: ['subscriptions'],
+        operationId: 'subscribeToEvent',
         body: z.object({
           name: z.string(),
           email: z.string().email(),
           referrer: z.string().nullish(),
         }),
         response: {
-          201: z.object({
-            subscriberId: z.string(),
-          }),
+          201: z.object({ subscriberId: z.string() }),
         },
       },
     },
@@ -27,12 +26,10 @@ export const subscribeToEventRoute: FastifyPluginAsyncZod = async app => {
       const { subscriberId } = await subscribeToEvent({
         name,
         email,
-        referrerId: referrer,
+        invitedBySubscriberId: referrer || null,
       })
 
-      return reply.status(201).send({
-        subscriberId,
-      })
+      return reply.status(201).send({ subscriberId })
     }
   )
 }
